@@ -1,5 +1,5 @@
 # Networks
-
+(check line 348)
 A network is a group of connected devices that share data with each other.
 
 ## How Computers and Printers Communicate
@@ -343,6 +343,10 @@ No, a significant portion of data sent to a printer consists of non printable co
     - Each packet is wrapped with TCP and IP headers containing source/destination addresses, port numbers and sequence information
     - This data is essential for transport but is stripped away by the printer's network interface and is never seen by the RIP
     - The same principle applies to USB packets for a local printer
+
+
+# Actual important stuff starts from here
+
 
 # Network Communication Fundamentals
 
