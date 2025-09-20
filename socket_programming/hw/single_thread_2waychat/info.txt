@@ -1,0 +1,3 @@
+when we ccreate a sigle thread  2 way chat we can send like one message each, client server client server, now tryy to send two requests from client, will server be able to handle it?
+why not?
+fix it
