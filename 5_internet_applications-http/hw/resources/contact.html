@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Simple HTTP Server</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      nav {
+        background-color: #f4f4f4;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      nav a {
+        margin-right: 15px;
+        text-decoration: none;
+        color: #333;
+      }
+      nav a:hover {
+        color: #007acc;
+      }
+      .header {
+        text-align: center;
+        color: #333;
+        border-bottom: 2px solid #007acc;
+        padding-bottom: 10px;
+      }
+      .content {
+        margin-top: 20px;
+      }
+      .contact-info {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .server-info {
+        background-color: #e8f4fd;
+        padding: 15px;
+        border-left: 4px solid #007acc;
+        margin: 15px 0;
+      }
+      .note {
+        background-color: #fff3cd;
+        padding: 10px;
+        border: 1px solid #ffeaa7;
+        border-radius: 4px;
+        margin: 15px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+
+    <div class="header">
+      <h1>Contact Information</h1>
+    </div>
+
+    <div class="content">
+      <h2>Get in Touch</h2>
+      <p>
+        This simple HTTP server is a demonstration project for learning network
+        programming and HTTP protocol fundamentals.
+      </p>
+
+      <div class="contact-info">
+        <h3>Project Information</h3>
+        <p><strong>Course:</strong> Computer Networks</p>
+        <p>
+          <strong>Assignment:</strong> Build a Simple HTTP Server Using Socket
+          Programming
+        </p>
+        <p><strong>Technology:</strong> Python Socket Programming</p>
+        <p><strong>Protocol:</strong> HTTP/1.1</p>
+      </div>
+
+      <div class="server-info">
+        <h3>Server Details</h3>
+        <p><strong>Default Host:</strong> 127.0.0.1 (localhost)</p>
+        <p><strong>Default Port:</strong> 8000</p>
+        <p><strong>Resources Directory:</strong> ./resources/</p>
+        <p><strong>Supported Methods:</strong> GET only</p>
+      </div>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Start the server: <code>python server.py</code></li>
+        <li>Or with custom port: <code>python server.py 8080</code></li>
+        <li>
+          Or with custom host and port:
+          <code>python server.py 8080 0.0.0.0</code>
+        </li>
+        <li>
+          Open your browser and navigate to <code>http://localhost:8000</code>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>Note:</strong> This is a simple educational HTTP server and
+        should not be used in production environments. It lacks many features
+        required for a production web server such as SSL/TLS support, advanced
+        caching, compression, and robust security measures.
+      </div>
+
+      <h3>Test URLs</h3>
+      <ul>
+        <li><a href="/">Homepage (index.html)</a></li>
+        <li><a href="/about.html">About Page</a></li>
+        <li><a href="/contact.html">Contact Page (this page)</a></li>
+        <li><a href="/nonexistent.html">Test 404 Error</a></li>
+      </ul>
+
+      <h3>Server Features Demonstrated</h3>
+      <ul>
+        <li>HTTP request parsing and response generation</li>
+        <li>Static file serving with proper MIME types</li>
+        <li>Error handling with custom error pages</li>
+        <li>Security measures (path traversal protection)</li>
+        <li>Logging and monitoring capabilities</li>
+        <li>Command-line configuration support</li>
+      </ul>
+
+      <hr />
+      <p><em>Thank you for testing our Simple HTTP Server!</em></p>
+    </div>
+  </body>
+</html>

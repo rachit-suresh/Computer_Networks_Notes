@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Simple HTTP Server</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      nav {
+        background-color: #f4f4f4;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      nav a {
+        margin-right: 15px;
+        text-decoration: none;
+        color: #333;
+      }
+      nav a:hover {
+        color: #007acc;
+      }
+      .header {
+        text-align: center;
+        color: #333;
+        border-bottom: 2px solid #007acc;
+        padding-bottom: 10px;
+      }
+      .content {
+        margin-top: 20px;
+      }
+      .code-block {
+        background-color: #f8f8f8;
+        padding: 15px;
+        border-left: 4px solid #007acc;
+        margin: 15px 0;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+
+    <div class="header">
+      <h1>About Simple HTTP Server</h1>
+    </div>
+
+    <div class="content">
+      <h2>Project Overview</h2>
+      <p>
+        This is a simple HTTP server implementation built from scratch using
+        Python socket programming. It demonstrates the fundamentals of the HTTP
+        protocol and network communication.
+      </p>
+
+      <h3>Technical Details</h3>
+      <ul>
+        <li><strong>Language:</strong> Python 3</li>
+        <li><strong>Protocol:</strong> HTTP/1.1 over TCP</li>
+        <li><strong>Architecture:</strong> Single-threaded server</li>
+        <li><strong>Port:</strong> 8000 (configurable)</li>
+        <li>
+          <strong>File Serving:</strong> Static HTML files from resources
+          directory
+        </li>
+      </ul>
+
+      <h3>Security Features</h3>
+      <ul>
+        <li>Path traversal protection using absolute path validation</li>
+        <li>Method restriction (only GET requests allowed)</li>
+        <li>Proper error handling and status codes</li>
+        <li>Input validation and sanitization</li>
+      </ul>
+
+      <h3>HTTP Status Codes Supported</h3>
+      <div class="code-block">
+        200 OK - Successful file serving<br />
+        400 Bad Request - Malformed requests<br />
+        403 Forbidden - Unauthorized path access<br />
+        404 Not Found - File doesn't exist<br />
+        405 Method Not Allowed - Non-GET requests<br />
+        500 Internal Server Error - Server-side errors
+      </div>
+
+      <h3>Learning Objectives</h3>
+      <p>This project helps understand:</p>
+      <ul>
+        <li>Low-level socket programming</li>
+        <li>HTTP protocol structure and headers</li>
+        <li>Web server architecture</li>
+        <li>Security considerations in web development</li>
+        <li>Error handling and logging</li>
+      </ul>
+
+      <hr />
+      <p><em>Simple HTTP Server - Computer Networks Assignment</em></p>
+    </div>
+  </body>
+</html>
