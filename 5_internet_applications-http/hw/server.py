@@ -195,11 +195,67 @@ Requires root/admin privileges and careful setup.
 
 '''
 def is_safe_path(base_dir, path):
+    abs_base = os.path.abspath(base_dir)
+    abs_path = os.path.abspath(path)
+    try:
+        return os.path.commonpath([abs_base, abs_path]) == abs_base
+    except ValueError:
+        return False
+
+    '''
     # Normalize and get absolute paths
     abs_base = os.path.abspath(base_dir)
     abs_path = os.path.abspath(path)
     # Check if abs_path starts with abs_base
     return abs_path.startswith(abs_base)
+
+    The original code used abs_path.startswith(abs_base) to verify that a user was accessing a file within a designated directory. The problem is that this is just a simple text comparison. It can be easily fooled.
+
+Let's use an example:
+
+    Your allowed directory (base_dir) is /srv/resources.
+
+    A hacker creates a directory named /srv/resources_evil and puts a malicious file in it.
+
+Now, a request comes in for the file /srv/resources_evil/malicious_file.sh.
+
+Old Code's Logic:
+
+    abs_base becomes /srv/resources.
+
+    abs_path becomes /srv/resources_evil/malicious_file.sh.
+
+    The check is: Does "/srv/resources_evil/malicious_file.sh" start with "/srv/resources"?
+
+    Result: True. The check passes, and the server might execute or serve a file from a completely different and unauthorized directory! 😱
+
+This is the classic bypass: the attacker uses a directory name that shares a prefix with the legitimate one.
+
+The Solution: How the New Code Works 🛡️
+
+The new code uses os.path.commonpath(), which is much smarter. It doesn't just compare the beginning of the strings; it finds the actual, deepest directory that both paths share.
+
+Let's re-run the same malicious scenario:
+
+New Code's Logic:
+
+    abs_base is still /srv/resources.
+
+    abs_path is still /srv/resources_evil/malicious_file.sh.
+
+    The check calculates os.path.commonpath(['/srv/resources', '/srv/resources_evil/malicious_file.sh']).
+
+        The common path between these two is just /srv.
+
+    It then compares the result: Is /srv equal to /srv/resources?
+
+    Result: False. Access is correctly denied.
+
+For a valid file request, like /srv/resources/images/cat.jpg, os.path.commonpath() would return /srv/resources, the check would pass ('/srv/resources' == '/srv/resources'), and the file would be served as intended.
+
+The try...except ValueError block is added because os.path.commonpath can raise an error if the paths are on different drives (e.g., C:\ and D:\ on Windows), making the code more robust.
+
+    '''
 
 def error_page(status_code, status_message,brief_desc="cant be asked"):
    return f'''
@@ -217,9 +273,16 @@ def error_page(status_code, status_message,brief_desc="cant be asked"):
 </html>
 '''
 
-def response_body(http_version, status_code, status_message,  content_length=" ", data=" "):
-  return f'''{http_version} {status_code} {status_message}\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: {content_length}\r\nDate: {datetime.datetime.now()}\r\nServer: Simple HTTP Server\r\nConnection: close\r\n{data}'''
-
+def response_body(http_version, status_code, status_message, content_length="0", data=""):
+  headers = (
+      f"{http_version} {status_code} {status_message}\r\n"
+      "Content-Type: text/html; charset=utf-8\r\n"
+      f"Content-Length: {content_length}\r\n"
+      f"Date: {datetime.datetime.utcnow():%a, %d %b %Y %H:%M:%S GMT}\r\n"
+      "Server: Simple HTTP Server\r\n"
+      "Connection: close\r\n"
+  )
+  return f"{headers}\r\n{data}"
 
 sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 print("Socket created")
@@ -260,8 +323,8 @@ try:
         request=conn.recv(4096)
 
         if not request:
-          print("Nice talking to you. Bye!!")
-          break
+          print("Client closed the connection")
+          continue
 
         '''if not request.startswith("GET"):
           response = response_body("HTTP/1.1", 405, "Method Not Allowed")
