@@ -202,7 +202,7 @@ def is_safe_path(base_dir, path):
     except ValueError:
         return False
 
-    '''
+'''
     # Normalize and get absolute paths
     abs_base = os.path.abspath(base_dir)
     abs_path = os.path.abspath(path)
