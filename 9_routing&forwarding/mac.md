@@ -5,7 +5,7 @@ Unique identifier for the actual hardware interface
 Evry mac addr is globally unique and manufacturers ensure that
 Mac addr are usally burnt into the device during manufacturing, but nowadays we can randomise mac from like a software perspective
 
-Any network connection that we can make have some kind of physical hardware associated with it like bluetooth or ethernet or wifi
+Any network connection that we can make has some kind of physical hardware associated with it like bluetooth or ethernet or wifi
 
 Help 2 devices on same network talk to each other
 We use ip addr to get the mac addr
